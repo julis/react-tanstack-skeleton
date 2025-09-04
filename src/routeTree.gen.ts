@@ -9,188 +9,279 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as LoginRouteImport } from './routes/login'
-import { Route as DashboardRouteImport } from './routes/dashboard'
-import { Route as ContactRouteImport } from './routes/contact'
-import { Route as AboutRouteImport } from './routes/about'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
-import { Route as DashboardSettingsRouteImport } from './routes/dashboard/settings'
+import { Route as SidebarRouteImport } from './routes/_sidebar'
+import { Route as RootRouteImport } from './routes/_root'
+import { Route as RootIndexRouteImport } from './routes/_root/index'
+import { Route as SidebarSidebarDemoRouteImport } from './routes/_sidebar/sidebar-demo'
+import { Route as SidebarDashboardRouteImport } from './routes/_sidebar/dashboard'
+import { Route as SidebarAboutSidebarRouteImport } from './routes/_sidebar/about-sidebar'
+import { Route as RootLoginRouteImport } from './routes/_root/login'
+import { Route as RootContactRouteImport } from './routes/_root/contact'
+import { Route as RootAboutRouteImport } from './routes/_root/about'
+import { Route as SidebarDashboardIndexRouteImport } from './routes/_sidebar/dashboard/index'
+import { Route as SidebarDashboardSettingsRouteImport } from './routes/_sidebar/dashboard/settings'
 
-const LoginRoute = LoginRouteImport.update({
-  id: '/login',
-  path: '/login',
+const SidebarRoute = SidebarRouteImport.update({
+  id: '/_sidebar',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DashboardRoute = DashboardRouteImport.update({
+const RootRoute = RootRouteImport.update({
+  id: '/_root',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RootIndexRoute = RootIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => RootRoute,
+} as any)
+const SidebarSidebarDemoRoute = SidebarSidebarDemoRouteImport.update({
+  id: '/sidebar-demo',
+  path: '/sidebar-demo',
+  getParentRoute: () => SidebarRoute,
+} as any)
+const SidebarDashboardRoute = SidebarDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => SidebarRoute,
 } as any)
-const ContactRoute = ContactRouteImport.update({
+const SidebarAboutSidebarRoute = SidebarAboutSidebarRouteImport.update({
+  id: '/about-sidebar',
+  path: '/about-sidebar',
+  getParentRoute: () => SidebarRoute,
+} as any)
+const RootLoginRoute = RootLoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => RootRoute,
+} as any)
+const RootContactRoute = RootContactRouteImport.update({
   id: '/contact',
   path: '/contact',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => RootRoute,
 } as any)
-const AboutRoute = AboutRouteImport.update({
+const RootAboutRoute = RootAboutRouteImport.update({
   id: '/about',
   path: '/about',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => RootRoute,
 } as any)
-const IndexRoute = IndexRouteImport.update({
+const SidebarDashboardIndexRoute = SidebarDashboardIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => SidebarDashboardRoute,
 } as any)
-const DashboardIndexRoute = DashboardIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => DashboardRoute,
-} as any)
-const DashboardSettingsRoute = DashboardSettingsRouteImport.update({
-  id: '/settings',
-  path: '/settings',
-  getParentRoute: () => DashboardRoute,
-} as any)
+const SidebarDashboardSettingsRoute =
+  SidebarDashboardSettingsRouteImport.update({
+    id: '/settings',
+    path: '/settings',
+    getParentRoute: () => SidebarDashboardRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/about': typeof AboutRoute
-  '/contact': typeof ContactRoute
-  '/dashboard': typeof DashboardRouteWithChildren
-  '/login': typeof LoginRoute
-  '/dashboard/settings': typeof DashboardSettingsRoute
-  '/dashboard/': typeof DashboardIndexRoute
+  '/about': typeof RootAboutRoute
+  '/contact': typeof RootContactRoute
+  '/login': typeof RootLoginRoute
+  '/about-sidebar': typeof SidebarAboutSidebarRoute
+  '/dashboard': typeof SidebarDashboardRouteWithChildren
+  '/sidebar-demo': typeof SidebarSidebarDemoRoute
+  '/': typeof RootIndexRoute
+  '/dashboard/settings': typeof SidebarDashboardSettingsRoute
+  '/dashboard/': typeof SidebarDashboardIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/about': typeof AboutRoute
-  '/contact': typeof ContactRoute
-  '/login': typeof LoginRoute
-  '/dashboard/settings': typeof DashboardSettingsRoute
-  '/dashboard': typeof DashboardIndexRoute
+  '/about': typeof RootAboutRoute
+  '/contact': typeof RootContactRoute
+  '/login': typeof RootLoginRoute
+  '/about-sidebar': typeof SidebarAboutSidebarRoute
+  '/sidebar-demo': typeof SidebarSidebarDemoRoute
+  '/': typeof RootIndexRoute
+  '/dashboard/settings': typeof SidebarDashboardSettingsRoute
+  '/dashboard': typeof SidebarDashboardIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
-  '/about': typeof AboutRoute
-  '/contact': typeof ContactRoute
-  '/dashboard': typeof DashboardRouteWithChildren
-  '/login': typeof LoginRoute
-  '/dashboard/settings': typeof DashboardSettingsRoute
-  '/dashboard/': typeof DashboardIndexRoute
+  '/_root': typeof RootRouteWithChildren
+  '/_sidebar': typeof SidebarRouteWithChildren
+  '/_root/about': typeof RootAboutRoute
+  '/_root/contact': typeof RootContactRoute
+  '/_root/login': typeof RootLoginRoute
+  '/_sidebar/about-sidebar': typeof SidebarAboutSidebarRoute
+  '/_sidebar/dashboard': typeof SidebarDashboardRouteWithChildren
+  '/_sidebar/sidebar-demo': typeof SidebarSidebarDemoRoute
+  '/_root/': typeof RootIndexRoute
+  '/_sidebar/dashboard/settings': typeof SidebarDashboardSettingsRoute
+  '/_sidebar/dashboard/': typeof SidebarDashboardIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | '/'
     | '/about'
     | '/contact'
-    | '/dashboard'
     | '/login'
+    | '/about-sidebar'
+    | '/dashboard'
+    | '/sidebar-demo'
+    | '/'
     | '/dashboard/settings'
     | '/dashboard/'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/'
     | '/about'
     | '/contact'
     | '/login'
+    | '/about-sidebar'
+    | '/sidebar-demo'
+    | '/'
     | '/dashboard/settings'
     | '/dashboard'
   id:
     | '__root__'
-    | '/'
-    | '/about'
-    | '/contact'
-    | '/dashboard'
-    | '/login'
-    | '/dashboard/settings'
-    | '/dashboard/'
+    | '/_root'
+    | '/_sidebar'
+    | '/_root/about'
+    | '/_root/contact'
+    | '/_root/login'
+    | '/_sidebar/about-sidebar'
+    | '/_sidebar/dashboard'
+    | '/_sidebar/sidebar-demo'
+    | '/_root/'
+    | '/_sidebar/dashboard/settings'
+    | '/_sidebar/dashboard/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  AboutRoute: typeof AboutRoute
-  ContactRoute: typeof ContactRoute
-  DashboardRoute: typeof DashboardRouteWithChildren
-  LoginRoute: typeof LoginRoute
+  RootRoute: typeof RootRouteWithChildren
+  SidebarRoute: typeof SidebarRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/login': {
-      id: '/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginRouteImport
+    '/_sidebar': {
+      id: '/_sidebar'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof SidebarRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/dashboard': {
-      id: '/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof DashboardRouteImport
+    '/_root': {
+      id: '/_root'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof RootRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/contact': {
-      id: '/contact'
-      path: '/contact'
-      fullPath: '/contact'
-      preLoaderRoute: typeof ContactRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/': {
-      id: '/'
+    '/_root/': {
+      id: '/_root/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof RootIndexRouteImport
+      parentRoute: typeof RootRoute
     }
-    '/dashboard/': {
-      id: '/dashboard/'
+    '/_sidebar/sidebar-demo': {
+      id: '/_sidebar/sidebar-demo'
+      path: '/sidebar-demo'
+      fullPath: '/sidebar-demo'
+      preLoaderRoute: typeof SidebarSidebarDemoRouteImport
+      parentRoute: typeof SidebarRoute
+    }
+    '/_sidebar/dashboard': {
+      id: '/_sidebar/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof SidebarDashboardRouteImport
+      parentRoute: typeof SidebarRoute
+    }
+    '/_sidebar/about-sidebar': {
+      id: '/_sidebar/about-sidebar'
+      path: '/about-sidebar'
+      fullPath: '/about-sidebar'
+      preLoaderRoute: typeof SidebarAboutSidebarRouteImport
+      parentRoute: typeof SidebarRoute
+    }
+    '/_root/login': {
+      id: '/_root/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof RootLoginRouteImport
+      parentRoute: typeof RootRoute
+    }
+    '/_root/contact': {
+      id: '/_root/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof RootContactRouteImport
+      parentRoute: typeof RootRoute
+    }
+    '/_root/about': {
+      id: '/_root/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof RootAboutRouteImport
+      parentRoute: typeof RootRoute
+    }
+    '/_sidebar/dashboard/': {
+      id: '/_sidebar/dashboard/'
       path: '/'
       fullPath: '/dashboard/'
-      preLoaderRoute: typeof DashboardIndexRouteImport
-      parentRoute: typeof DashboardRoute
+      preLoaderRoute: typeof SidebarDashboardIndexRouteImport
+      parentRoute: typeof SidebarDashboardRoute
     }
-    '/dashboard/settings': {
-      id: '/dashboard/settings'
+    '/_sidebar/dashboard/settings': {
+      id: '/_sidebar/dashboard/settings'
       path: '/settings'
       fullPath: '/dashboard/settings'
-      preLoaderRoute: typeof DashboardSettingsRouteImport
-      parentRoute: typeof DashboardRoute
+      preLoaderRoute: typeof SidebarDashboardSettingsRouteImport
+      parentRoute: typeof SidebarDashboardRoute
     }
   }
 }
 
-interface DashboardRouteChildren {
-  DashboardSettingsRoute: typeof DashboardSettingsRoute
-  DashboardIndexRoute: typeof DashboardIndexRoute
+interface RootRouteChildren {
+  RootAboutRoute: typeof RootAboutRoute
+  RootContactRoute: typeof RootContactRoute
+  RootLoginRoute: typeof RootLoginRoute
+  RootIndexRoute: typeof RootIndexRoute
 }
 
-const DashboardRouteChildren: DashboardRouteChildren = {
-  DashboardSettingsRoute: DashboardSettingsRoute,
-  DashboardIndexRoute: DashboardIndexRoute,
+const RootRouteChildren: RootRouteChildren = {
+  RootAboutRoute: RootAboutRoute,
+  RootContactRoute: RootContactRoute,
+  RootLoginRoute: RootLoginRoute,
+  RootIndexRoute: RootIndexRoute,
 }
 
-const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
-  DashboardRouteChildren,
-)
+const RootRouteWithChildren = RootRoute._addFileChildren(RootRouteChildren)
+
+interface SidebarDashboardRouteChildren {
+  SidebarDashboardSettingsRoute: typeof SidebarDashboardSettingsRoute
+  SidebarDashboardIndexRoute: typeof SidebarDashboardIndexRoute
+}
+
+const SidebarDashboardRouteChildren: SidebarDashboardRouteChildren = {
+  SidebarDashboardSettingsRoute: SidebarDashboardSettingsRoute,
+  SidebarDashboardIndexRoute: SidebarDashboardIndexRoute,
+}
+
+const SidebarDashboardRouteWithChildren =
+  SidebarDashboardRoute._addFileChildren(SidebarDashboardRouteChildren)
+
+interface SidebarRouteChildren {
+  SidebarAboutSidebarRoute: typeof SidebarAboutSidebarRoute
+  SidebarDashboardRoute: typeof SidebarDashboardRouteWithChildren
+  SidebarSidebarDemoRoute: typeof SidebarSidebarDemoRoute
+}
+
+const SidebarRouteChildren: SidebarRouteChildren = {
+  SidebarAboutSidebarRoute: SidebarAboutSidebarRoute,
+  SidebarDashboardRoute: SidebarDashboardRouteWithChildren,
+  SidebarSidebarDemoRoute: SidebarSidebarDemoRoute,
+}
+
+const SidebarRouteWithChildren =
+  SidebarRoute._addFileChildren(SidebarRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  AboutRoute: AboutRoute,
-  ContactRoute: ContactRoute,
-  DashboardRoute: DashboardRouteWithChildren,
-  LoginRoute: LoginRoute,
+  RootRoute: RootRouteWithChildren,
+  SidebarRoute: SidebarRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

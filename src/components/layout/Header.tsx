@@ -36,6 +36,12 @@ export function Header() {
             >
               Dashboard
             </Link>
+            <Link
+              to="/sidebar-demo"
+              className="text-foreground/60 transition-colors hover:text-foreground/80 [&.active]:text-foreground"
+            >
+              Sidebar Demo
+            </Link>
           </nav>
           <div className="flex items-center space-x-2">
             <Button asChild size="sm">
