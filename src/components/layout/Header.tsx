@@ -37,6 +37,11 @@ export function Header() {
               Dashboard
             </Link>
           </nav>
+          <div className="flex items-center space-x-2">
+            <Button asChild size="sm">
+              <Link to="/login">Login</Link>
+            </Button>
+          </div>
         </div>
       </div>
     </header>
